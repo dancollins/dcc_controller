@@ -1,0 +1,33 @@
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Other outputs we don't want
+*.map
+*.lst
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.hex
+*.bin
+
+# Emacs
+*~
+\#*\#
+.\#*
+/.emacs.desktop
+/.emacs.desktop.lock
+auto-save-list
+tramp
