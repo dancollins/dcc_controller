@@ -10,10 +10,11 @@ PROJECT = dcc_controller
 # Add project sources
 SRCS_C = \
 	main.c \
-	hal/uart.c \
 	hal/retarget.c \
 	hal/systick.c \
+	hal/dcc_hal.c \
 	driver/ringbuf.c \
+	driver/dcc.c \
 	system_stm32f10x.c
 
 SRCS_H =
@@ -84,7 +85,7 @@ OBJS = 	$(addprefix build/, $(SRCS_C:.c=.o)) \
 #
 .PHONY: all clean prog
 
-all: clean output/$(PROJECT).elf
+all: output/$(PROJECT).elf
 
 build/%.o: src/%.c
 	$(MKDIR) -p $(dir $@)
@@ -113,6 +114,9 @@ output/$(PROJECT).elf: $(OBJS)
 clean:
 	rm -rf build
 	rm -rf output
+
+prog: output/$(PROJECT).elf
+	JLinkExe -device stm32f103rb -commanderscript flash.jlink
 
 
 #
