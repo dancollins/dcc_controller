@@ -54,10 +54,29 @@ extern size_t ringbuf_get_len(ringbuf_t *ringbuf);
 
 
 /**
+ * Get the number of bytes available for new data in the ring buffer
+ * \param ringbuf the ring buffer to test
+ * \return the number of bytes of space available in the ring buffer
+ */
+extern size_t
+ringbuf_get_space(ringbuf_t *ringbuf);
+
+
+/**
  * Test if the ring buffer contains data
  * @param ringbuf The ring buffer to test
  * @returns True if the ring buffer contains data
  */
 extern bool ringbuf_has_data(ringbuf_t * ringbuf);
+
+
+/**
+ * Read a single byte from the buffer
+ * \param rb the ring buffer structure
+ * \param data memory to store the byte
+ * \return the number of bytes read (1 or 0)
+ */
+extern uint32_t
+ringbuf_pop(ringbuf_t *ringbuf, uint8_t *data);
 
 #endif

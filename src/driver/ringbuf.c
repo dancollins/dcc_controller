@@ -58,13 +58,42 @@ void ringbuf_flush(ringbuf_t *ringbuf) {
   ringbuf->buffer[0] = 0;
 }
 
+
 size_t ringbuf_get_len(ringbuf_t *ringbuf) {
   return ringbuf->length;
 }
+
+
+size_t
+ringbuf_get_space(ringbuf_t *ringbuf)
+{
+    return ringbuf->capacity - ringbuf->length;
+}
+
 
 bool ringbuf_has_data(ringbuf_t * ringbuf) {
   if (ringbuf->length)
     return true;
 
   return false;
+}
+
+
+uint32_t
+ringbuf_pop(ringbuf_t *ringbuf, uint8_t *data)
+{
+    /* Can't read from an empty buffer */
+    if (!ringbuf_has_data(ringbuf))
+    {
+        return 0;
+    }
+
+    /* Copy data from the buffer */
+    *data = ringbuf->buffer[ringbuf->tail];
+    ringbuf->tail = (ringbuf->tail + 1) % ringbuf->capacity;
+
+    /* Update the buffer length */
+    ringbuf->length--;
+
+    return 1;
 }

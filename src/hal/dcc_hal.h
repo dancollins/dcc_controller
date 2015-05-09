@@ -8,6 +8,15 @@
 #include "stm32f10x.h"
 
 
+/*
+ * GPIO
+ */
+#define DCC_HAL_GPIO         (GPIOB)
+#define DCC_HAL_GPIO_RCC     (RCC_APB2Periph_GPIOB)
+#define DCC_HAL_GPIO_PIN_1   (GPIO_Pin_0)
+#define DCC_HAL_GPIO_PIN_2   (GPIO_Pin_1)
+
+
 /**
  * Initialises the DCC low level driver
  */
@@ -21,8 +30,8 @@ dcc_hal_init(void);
  * \param len the number of octets to write
  * \return the number of octets written
  */
-extern uint32_t
-dcc_hal_write(uint8_t *data, uint32_t len);
+extern uint8_t
+dcc_hal_write(uint8_t *data, uint8_t len);
 
 
 #endif /* _DCC_HAL_H */
