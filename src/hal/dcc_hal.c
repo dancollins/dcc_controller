@@ -3,8 +3,8 @@
 #include "ringbuf.h"
 
 
-/* Dead time to allow FETs in the H bridge to switch off completely before
- * the next set is switched on */
+/* Dead time to allow transistors in the H bridge to switch off completely
+ * before the next set is switched on */
 #define DEAD_TIME (10)
 
 
@@ -97,20 +97,23 @@ set_output(bool output_state)
 {
     int i;
 
-    /* Set the new output state. We insert some dead time to allow the
-     * H bridge FETs to switch off properly */
+    /* Set the new output state. */
     if (output_state)
     {
         GPIO_WriteBit(DCC_HAL_GPIO, DCC_HAL_GPIO_PIN_2, Bit_RESET);
+#if (DEAD_TIME > 0)
         for (i = 0; i < DEAD_TIME; i++)
             __NOP();
+#endif
         GPIO_WriteBit(DCC_HAL_GPIO, DCC_HAL_GPIO_PIN_1, Bit_SET);
     }
     else
     {
         GPIO_WriteBit(DCC_HAL_GPIO, DCC_HAL_GPIO_PIN_1, Bit_RESET);
+#if (DEAD_TIME > 0)
         for (i = 0; i < DEAD_TIME; i++)
             __NOP();
+#endif
         GPIO_WriteBit(DCC_HAL_GPIO, DCC_HAL_GPIO_PIN_2, Bit_SET);
     }
 }

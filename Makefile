@@ -13,6 +13,7 @@ SRCS_C = \
 	hal/retarget.c \
 	hal/systick.c \
 	hal/dcc_hal.c \
+	hal/sseg.c \
 	driver/ringbuf.c \
 	driver/dcc.c \
 	system_stm32f10x.c
@@ -36,6 +37,8 @@ $(error "STM_DIR not defined.")
 endif
 
 STM_SRCS_C = \
+	STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c \
+	STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c \
 	STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c \
 	STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c \
 	STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c \

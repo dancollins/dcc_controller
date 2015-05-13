@@ -13,8 +13,8 @@
  */
 #define DCC_HAL_GPIO         (GPIOB)
 #define DCC_HAL_GPIO_RCC     (RCC_APB2Periph_GPIOB)
-#define DCC_HAL_GPIO_PIN_1   (GPIO_Pin_0)
-#define DCC_HAL_GPIO_PIN_2   (GPIO_Pin_1)
+#define DCC_HAL_GPIO_PIN_1   (GPIO_Pin_1)
+#define DCC_HAL_GPIO_PIN_2   (GPIO_Pin_10)
 
 
 /**

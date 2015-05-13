@@ -4,9 +4,14 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+
+typedef void (*systick_callback_t)(void);
+
 extern volatile size_t systicks;
 
-extern void systick_init(void);
+/**
+ * Prepare the systick timer, with an optional tick callback */
+extern void systick_init(systick_callback_t cb);
 
 /**
  * Create a blocking delay.

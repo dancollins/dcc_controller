@@ -6,13 +6,17 @@
 
 volatile size_t systicks;
 
-void systick_init(void) {
+systick_callback_t callback;
+
+void systick_init(systick_callback_t cb) {
   /* Set SysTick timer for 1ms interrupts */
   if (SysTick_Config(SystemCoreClock / 1000)) {
     /* TODO: Assertions */
     fprintf(stderr, "Error setting systick clock!\n");
     while(1);
   }
+
+  callback = cb;
 }
 
 void systick_delay(size_t duration) {
@@ -34,4 +38,7 @@ bool systick_test_duration(size_t timestamp, size_t duration) {
 
 void SysTick_Handler(void) {
   systicks++;
+
+  if (callback != NULL)
+      callback();
 }

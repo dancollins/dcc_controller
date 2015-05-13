@@ -1,5 +1,6 @@
 speed 5000
 h
+r
 erase
 loadbin output/dcc_controller.bin, 0x8000000
 r
