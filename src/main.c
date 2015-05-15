@@ -18,7 +18,7 @@
 
 /* Number of milliseconds between tasks */
 #define STATE_UPDATE (100)
-#define DCC_UPDATE (50)
+#define DCC_UPDATE (25)
 #define THROTTLE_UPDATE (7) /* units are 100 milliseconds */
 
 
@@ -263,9 +263,11 @@ main(void)
             }
 
             /* e stop */
-            if (buttons[BESTOP] == 5)
+            if (buttons[BESTOP] == 5 && !buttons_checked[BESTOP])
             {
                 state = STATE_E_STOP;
+
+				buttons_checked[BESTOP] = true;
             }
 
             /* Update the display and DCC */

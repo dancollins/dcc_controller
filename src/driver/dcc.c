@@ -125,8 +125,8 @@ dcc_update(void)
             if (trains[i].address != 0)
             {
                 send_frame(&trains[i]);
-                /* We delay 6 ms (5ms required) to be safe */
-                systick_delay(6);
+                /* We delay 10 ms (5ms required) to be safe */
+                systick_delay(10);
             }
         }
     }
