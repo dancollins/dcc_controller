@@ -9,7 +9,7 @@
 #include "dcc_hal.h"
 
 
-#define DCC_N_TRAINS (3)
+#define DCC_N_TRAINS (10)
 
 
 /**

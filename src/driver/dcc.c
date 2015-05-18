@@ -95,13 +95,7 @@ send_frame(dcc_frame_t *frame)
 static void
 calculate_checksum(dcc_frame_t *frame)
 {
-    int i;
-
-    frame->checksum = frame->address;
-    for (i = 0; i < frame->n_data_bytes; i++)
-    {
-        frame->checksum ^= frame->data[i];
-    }
+	frame->checksum = frame->address ^ frame->data[0];
 }
 
 

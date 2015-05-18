@@ -223,7 +223,8 @@ main(void)
         {
             /* Update state based on buttons */
             /* left and right */
-            if (buttons[BLEFT] == 5 && !buttons_checked[BLEFT])
+            if (buttons[BLEFT] == 5 && !buttons_checked[BLEFT] &&
+				state != STATE_E_STOP)
             {
                 if (selected_train > 1)
                 {
@@ -236,7 +237,8 @@ main(void)
                 state = STATE_SELECT;
 
                 buttons_checked[BLEFT] = true;
-            } else if (buttons[BRIGHT] == 5 && !buttons_checked[BRIGHT])
+            } else if (buttons[BRIGHT] == 5 && !buttons_checked[BRIGHT] &&
+				state != STATE_E_STOP)
             {
                 if (selected_train < DCC_N_TRAINS)
                 {
@@ -252,7 +254,8 @@ main(void)
             }
 
             /* select */
-            if (buttons[BSELECT] == 5 && !buttons_checked[BSELECT])
+            if (buttons[BSELECT] == 5 && !buttons_checked[BSELECT] &&
+				state != STATE_E_STOP)
             {
                 state = STATE_THROTTLE;
 
@@ -265,7 +268,16 @@ main(void)
             /* e stop */
             if (buttons[BESTOP] == 5 && !buttons_checked[BESTOP])
             {
-                state = STATE_E_STOP;
+			  if (state != STATE_E_STOP)
+				{
+				  state = STATE_E_STOP;
+				  dcc_e_stop(true);
+				}
+			  else
+				{
+				  state = STATE_THROTTLE;
+				  dcc_e_stop(false);
+				}
 
 				buttons_checked[BESTOP] = true;
             }
@@ -311,7 +323,6 @@ main(void)
             case STATE_E_STOP:
                 sseg_set(0xEE);
                 sseg_set_dp(true, true);
-                dcc_e_stop(true);
                 break;
             }
 

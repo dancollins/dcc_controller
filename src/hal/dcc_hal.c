@@ -95,7 +95,9 @@ dcc_hal_write(uint8_t *data, uint8_t len)
 static void
 set_output(bool output_state)
 {
+#if (DEAD_TIME > 0)
     int i;
+#endif
 
     /* Set the new output state. */
     if (output_state)
